@@ -1,0 +1,53 @@
+<div class="shopping-list-container">
+  <h1> Lista de Compras<i class="fas fa-shopping-cart"></i></h1>
+
+  <form (ngSubmit)="addItem()" [formGroup]="itemForm">
+    <input
+      type="text"
+      formControlName="itemName"
+      placeholder="Adicione um item"
+      class="input-item"
+    />
+    <button type="submit" [disabled]="itemForm.invalid">
+      {{ editingItem ? "Salvar" : "Adicionar" }}
+    </button>
+  </form>
+
+  <div class="list-section">
+    <h3>Itens para comprar</h3>
+    <ul>
+      <li *ngFor="let item of itensNaoComprados" class="not-purchased">
+        <span>{{ item.nome }}</span>
+        <div class="action-buttons">
+          <button aria-label="Marcar como comprado" (click)="toggleItem(item)">
+            <i class="fas fa-check"></i>
+          </button>
+                    <button aria-label="Editar item" (click)="startEditing(item)">
+            <i class="fas fa-edit"></i>
+          </button>
+                    <button aria-label="Remover item" (click)="removeItem(item)">
+            <i class="fas fa-trash"></i>
+          </button>
+                  </div>
+      </li>
+    </ul>
+
+    <h3>Itens comprados</h3>
+    <ul>
+      <li *ngFor="let item of itensComprados" class="purchased">
+        <span>{{ item.nome }}</span>
+        <div class="action-buttons">
+          <button aria-label="Desmarcar como comprado" (click)="toggleItem(item)">
+            <i class="fas fa-undo"></i>
+          </button>
+                    <button aria-label="Editar item" (click)="startEditing(item)">
+            <i class="fas fa-edit"></i>
+          </button>
+                    <button aria-label="Remover item" (click)="removeItem(item)">
+            <i class="fas fa-trash"></i>
+          </button>
+                  </div>
+      </li>
+    </ul>
+  </div>
+</div>
